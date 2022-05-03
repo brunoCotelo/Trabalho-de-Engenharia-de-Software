@@ -19,10 +19,10 @@ import java.util.logging.Logger;
  */
 public class ConnectionFactory {
     
-    private final static String DRIVER = "com.mysql.jdbc.Driver";
+    private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
     private final static String URL = "jdbc:mysql://localhost:3306/dbProjFinal";
     private final static String USER = "root";
-    private final static String PASS = "admin";
+    private final static String PASS = "admin12313123123123";
     
     public static Connection getConnection(){
         
@@ -32,7 +32,7 @@ public class ConnectionFactory {
             return DriverManager.getConnection(URL, USER, PASS);
             
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new RuntimeException("Erro na conexão: ",ex);
+                throw new RuntimeException("Erro na conexão: ",ex);
         }
     }
     
