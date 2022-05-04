@@ -164,6 +164,11 @@ public void readJtableForCod(String cod){
 
         BG_Tipo.add(JRB_Alugado);
         JRB_Alugado.setText("Alugado");
+        JRB_Alugado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JRB_AlugadoActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -264,6 +269,7 @@ public void readJtableForCod(String cod){
         );
 
         JComBox_Empresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma empresa:", "Investiram", "Maxxwal", "Empresa 3" }));
+        JComBox_Empresa.setEnabled(false);
         JComBox_Empresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JComBox_EmpresaActionPerformed(evt);
@@ -579,7 +585,7 @@ dispose();
     }//GEN-LAST:event_JBT_CadastrarActionPerformed
 
     private void JComBox_EmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComBox_EmpresaActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_JComBox_EmpresaActionPerformed
 
     private void JComBox_SalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComBox_SalaActionPerformed
@@ -590,6 +596,7 @@ dispose();
     JTF_Cod.setText(null);
     BG_Tipo.clearSelection();
     JComBox_Empresa.setSelectedItem("Selecione uma empresa:");
+    JComBox_Empresa.setEnabled(false);
     JComBox_Sala.setSelectedItem("Selecione uma sala:");
     JTF_Buscar.setText(null);
 //componentes
@@ -604,6 +611,10 @@ dispose();
     }//GEN-LAST:event_JBT_LimparActionPerformed
 
     private void JRB_PatrimonioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRB_PatrimonioActionPerformed
+    if(JRB_Patrimonio.isSelected()){
+        JComBox_Empresa.setEnabled(false);
+    }
+    JComBox_Empresa.setSelectedItem("Selecione uma empresa:");
     }//GEN-LAST:event_JRB_PatrimonioActionPerformed
 
     private void JTbl_ConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTbl_ConsultaMouseClicked
@@ -820,6 +831,12 @@ Computador p = new Computador();
     private void JBT_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBT_BuscarActionPerformed
         readJtableForCod(JTF_Buscar.getText());
     }//GEN-LAST:event_JBT_BuscarActionPerformed
+
+    private void JRB_AlugadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRB_AlugadoActionPerformed
+    if(JRB_Alugado.isSelected()){
+        JComBox_Empresa.setEnabled(true);
+    }
+    }//GEN-LAST:event_JRB_AlugadoActionPerformed
 
     /**
      * @param args the command line arguments
