@@ -50,6 +50,7 @@ public class ComputadorDAO {
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
             
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao salvar!");
         }finally{
             ConnectionFactory.closeConnection(con, stmt);

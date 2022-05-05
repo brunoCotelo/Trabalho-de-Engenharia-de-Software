@@ -495,83 +495,90 @@ dispose();
     }//GEN-LAST:event_JCB_ProcessadorActionPerformed
 
     private void JBT_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBT_CadastrarActionPerformed
+        if(JTF_Cod.getText().equals("") || JComBox_Sala.getSelectedItem().equals("Selecione uma sala:") ||(!JRB_Alugado.isSelected() && !JRB_Patrimonio.isSelected())){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios.");
+        }else if(JRB_Alugado.isSelected() && JComBox_Empresa.getSelectedItem().equals("Selecione uma empresa:")){
+            JOptionPane.showMessageDialog(null, "Selecione uma empresa.");
+        }else{
 //id computador
-        Computador c = new Computador();
-        ComputadorDAO dao = new ComputadorDAO();
-        c.setIdComputador(JTF_Cod.getText());
+            Computador c = new Computador();
+            ComputadorDAO dao = new ComputadorDAO();
+            c.setIdComputador(JTF_Cod.getText());
         
 //sala
-        c.setSala(JComBox_Sala.getSelectedItem().toString());
+            c.setSala(JComBox_Sala.getSelectedItem().toString());
         
 //tipo
-        if(JRB_Alugado.isSelected()){
-            c.setTipo("Alugado");
-            c.setEmpresa(JComBox_Empresa.getSelectedItem().toString());
+            if(JRB_Alugado.isSelected()){
+                c.setTipo("Alugado");
+                c.setEmpresa(JComBox_Empresa.getSelectedItem().toString());
             
-        }else if(JRB_Patrimonio.isSelected()){
-            c.setTipo("Patrimônio");
-        }
+            }else if(JRB_Patrimonio.isSelected()){
+                c.setTipo("Patrimônio");
+            }
         
 //componentes
     //hd
-        if(JCB_HD.isSelected()){
-            c.setHD(true);
-        }else{
-            c.setHD(false);
-        }
+            if(JCB_HD.isSelected()){
+                c.setHD(true);
+            }else{
+                c.setHD(false);
+            }
     //placa video
-        if(JCB_PlacaVideo.isSelected()){
-            c.setPlacaVideo(true);
-        }else{
-            c.setPlacaVideo(false);
-        }
+            if(JCB_PlacaVideo.isSelected()){
+                c.setPlacaVideo(true);
+            }else{
+                c.setPlacaVideo(false);
+            }
     //placa mae
-        if(JCB_PlacaMae.isSelected()){
-            c.setPlacaMae(true);
-        }else{
-            c.setPlacaMae(false);
+            if(JCB_PlacaMae.isSelected()){
+                c.setPlacaMae(true);
+            }else{
+                c.setPlacaMae(false);
         }
     //RAM
-        if(JCB_RAM.isSelected()){
-            c.setRAM(true);
-        }else{
-            c.setRAM(false);
+            if(JCB_RAM.isSelected()){
+                c.setRAM(true);
+            }else{
+                c.setRAM(false);
         }
     //drive
-        if(JCB_Drive.isSelected()){
-            c.setDrive(true);
-        }else{
-            c.setDrive(false);
-        }
+            if(JCB_Drive.isSelected()){
+                c.setDrive(true);
+            }else{
+                c.setDrive(false);
+            }
     //fonte
-        if(JCB_Fonte.isSelected()){
-            c.setFonte(true);
-        }else{
-            c.setFonte(false);
-        }
+            if(JCB_Fonte.isSelected()){
+                c.setFonte(true);
+            }else{
+                c.setFonte(false);
+            }
     //processador
-        if(JCB_Processador.isSelected()){
-            c.setProcessador(true);
-        }else{
-            c.setProcessador(false);
-        }
+            if(JCB_Processador.isSelected()){
+                c.setProcessador(true);
+            }else{
+                c.setProcessador(false);
+            }
     //placa rede
-        if(JCB_PlacaRede.isSelected()){
-            c.setPlacaRede(true);
-        }else{
-            c.setPlacaRede(false);
-        }
+            if(JCB_PlacaRede.isSelected()){
+                c.setPlacaRede(true);
+            }else{
+                c.setPlacaRede(false);
+            }
         
-        dao.create(c);
+            dao.create(c);
         
-        readJtable();
+            readJtable();
         
 //limpar
-        JTF_Cod.setText(null);
+    JTF_Cod.setText(null);
     BG_Tipo.clearSelection();
     JComBox_Empresa.setSelectedItem("Selecione uma empresa:");
+    JComBox_Empresa.setEnabled(false);
     JComBox_Sala.setSelectedItem("Selecione uma sala:");
     JTF_Buscar.setText(null);
+        }
 //componentes
     JCB_PlacaMae.setSelected(false);
     JCB_HD.setSelected(false);
@@ -580,8 +587,8 @@ dispose();
     JCB_Drive.setSelected(false);
     JCB_Processador.setSelected(false);
     JCB_RAM.setSelected(false);
-    JCB_Fonte.setSelected(false);
-        
+    JCB_Fonte.setSelected(false);   
+    
     }//GEN-LAST:event_JBT_CadastrarActionPerformed
 
     private void JComBox_EmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComBox_EmpresaActionPerformed
@@ -625,12 +632,14 @@ Computador p = new Computador();
                     JRB_Alugado.setSelected(true);
                     JRB_Patrimonio.setSelected(false);
                     JComBox_Empresa.setSelectedItem(JTbl_Consulta.getValueAt(JTbl_Consulta.getSelectedRow(), 2).toString());
+                    JComBox_Empresa.setEnabled(true);
                     JComBox_Sala.setSelectedItem(JTbl_Consulta.getValueAt(JTbl_Consulta.getSelectedRow(), 3));
                 }
                 else if("Patrimônio".equals(JTbl_Consulta.getValueAt(JTbl_Consulta.getSelectedRow(), 1).toString())){
                     JRB_Patrimonio.setSelected(true);
                     JRB_Alugado.setSelected(false);
                     JComBox_Empresa.setSelectedItem("Selecione uma empresa:");
+                    JComBox_Empresa.setEnabled(false);
                     JComBox_Sala.setSelectedItem(JTbl_Consulta.getValueAt(JTbl_Consulta.getSelectedRow(), 3));
                 }
                 
@@ -730,98 +739,118 @@ Computador p = new Computador();
         ComputadorDAO dao = new ComputadorDAO();
         c.setIdComputador(JTF_Cod.getText());
         
-        dao.delete(c);
-        readJtable();
+        if(JTF_Cod.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Selecione um computador ou \ndigite seu código para ser deletado.", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            
+        }else{
+            
+        
+        int resposta = JOptionPane.showConfirmDialog(null, "Você não poderá reverter essa ação.", "Atenção!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        if(resposta == JOptionPane.CANCEL_OPTION){
+            
+        }else{
+        
+            dao.delete(c);
+            readJtable();
         
 //limpar
-    JTF_Cod.setText(null);
-    BG_Tipo.clearSelection();
-    JComBox_Empresa.setSelectedItem("Selecione uma empresa:");
-    JComBox_Sala.setSelectedItem("Selecione uma sala:");
-    JTF_Buscar.setText(null);
+        JTF_Cod.setText(null);
+        BG_Tipo.clearSelection();
+        JComBox_Empresa.setSelectedItem("Selecione uma empresa:");
+        JComBox_Sala.setSelectedItem("Selecione uma sala:");
+        JTF_Buscar.setText(null);
 //componentes
-    JCB_PlacaMae.setSelected(false);
-    JCB_HD.setSelected(false);
-    JCB_PlacaVideo.setSelected(false);
-    JCB_PlacaRede.setSelected(false);
-    JCB_Drive.setSelected(false);
-    JCB_Processador.setSelected(false);
-    JCB_RAM.setSelected(false);
-    JCB_Fonte.setSelected(false);
+        JCB_PlacaMae.setSelected(false);
+        JCB_HD.setSelected(false);
+        JCB_PlacaVideo.setSelected(false);
+        JCB_PlacaRede.setSelected(false);
+        JCB_Drive.setSelected(false);
+        JCB_Processador.setSelected(false);
+        JCB_RAM.setSelected(false);
+        JCB_Fonte.setSelected(false);
+        }
+        }
     }//GEN-LAST:event_DeletarActionPerformed
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
-        Computador c = new Computador();
-        ComputadorDAO dao = new ComputadorDAO();
+        if(JTF_Cod.getText().equals("") || JComBox_Sala.getSelectedItem().equals("Selecione uma sala:") ||(!JRB_Alugado.isSelected() && !JRB_Patrimonio.isSelected())){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios.");
+        }else if(JRB_Alugado.isSelected() && JComBox_Empresa.getSelectedItem().equals("Selecione uma empresa:")){
+            JOptionPane.showMessageDialog(null, "Selecione uma empresa.");
+        }else{
+
+            Computador c = new Computador();
+            ComputadorDAO dao = new ComputadorDAO();
         
 //sala
-        c.setSala(JComBox_Sala.getSelectedItem().toString());
+            c.setSala(JComBox_Sala.getSelectedItem().toString());
         
 //tipo
-        if(JRB_Alugado.isSelected()){
-            c.setTipo("Alugado");
-            c.setEmpresa(JComBox_Empresa.getSelectedItem().toString());
+            if(JRB_Alugado.isSelected()){
+                c.setTipo("Alugado");
+                c.setEmpresa(JComBox_Empresa.getSelectedItem().toString());
             
-        }else if(JRB_Patrimonio.isSelected()){
-            c.setTipo("Patrimônio");
-        }
+            }else if(JRB_Patrimonio.isSelected()){
+                c.setTipo("Patrimônio");
+            }
         
 //componentes
     //hd
-        if(JCB_HD.isSelected()){
-            c.setHD(true);
-        }else{
-            c.setHD(false);
-        }
+            if(JCB_HD.isSelected()){
+                c.setHD(true);
+            }else{
+                c.setHD(false);
+            }
     //placa video
-        if(JCB_PlacaVideo.isSelected()){
-            c.setPlacaVideo(true);
-        }else{
-            c.setPlacaVideo(false);
-        }
+            if(JCB_PlacaVideo.isSelected()){
+                c.setPlacaVideo(true);
+            }else{
+                c.setPlacaVideo(false);
+            }
     //placa mae
-        if(JCB_PlacaMae.isSelected()){
-            c.setPlacaMae(true);
-        }else{
-            c.setPlacaMae(false);
-        }
+            if(JCB_PlacaMae.isSelected()){
+                c.setPlacaMae(true);
+            }else{
+                c.setPlacaMae(false);
+            }
     //RAM
-        if(JCB_RAM.isSelected()){
-            c.setRAM(true);
-        }else{
-            c.setRAM(false);
-        }
+            if(JCB_RAM.isSelected()){
+                c.setRAM(true);
+            }else{
+                c.setRAM(false);
+            }
     //drive
-        if(JCB_Drive.isSelected()){
-            c.setDrive(true);
-        }else{
-            c.setDrive(false);
-        }
+            if(JCB_Drive.isSelected()){
+                c.setDrive(true);
+            }else{
+                c.setDrive(false);
+            }
     //fonte
-        if(JCB_Fonte.isSelected()){
-            c.setFonte(true);
-        }else{
-            c.setFonte(false);
-        }
+            if(JCB_Fonte.isSelected()){
+                c.setFonte(true);
+            }else{
+                c.setFonte(false);
+            }
     //processador
-        if(JCB_Processador.isSelected()){
-            c.setProcessador(true);
-        }else{
-            c.setProcessador(false);
-        }
+            if(JCB_Processador.isSelected()){
+                c.setProcessador(true);
+            }else{
+                c.setProcessador(false);
+            }
     //placa rede
-        if(JCB_PlacaRede.isSelected()){
-            c.setPlacaRede(true);
-        }else{
-            c.setPlacaRede(false);
-        }
-        
+            if(JCB_PlacaRede.isSelected()){
+                c.setPlacaRede(true);
+            }else{
+                c.setPlacaRede(false);
+            }
 //id computador
-    c.setIdComputador (JTF_Cod.getText());
+        c.setIdComputador (JTF_Cod.getText());
         
         dao.update(c);
         
         readJtable();
+        }
+
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void JTF_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF_BuscarActionPerformed
