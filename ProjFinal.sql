@@ -1,7 +1,7 @@
 CREATE DATABASE dbProjFinal;
 USE dbProjFinal;
 
-
+SELECT * FROM computador;	
 CREATE TABLE `computador` (
   `idComputador` varchar(11) NOT NULL,
   `Tipo` varchar(120) DEFAULT NULL,
@@ -19,9 +19,9 @@ CREATE TABLE `computador` (
 );
 
 
-CREATE TABLE `usuario` (
+/*CREATE TABLE `usuario` (
   `idUsuario` int(4) NOT NULL AUTO_INCREMENT,
   `login` varchar(25) DEFAULT NULL,
   `senha` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
-);
+);*/
