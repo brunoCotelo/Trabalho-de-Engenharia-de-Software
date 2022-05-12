@@ -10,8 +10,13 @@ package view;
  *
  * @author Lucas
  */
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.bean.Computador;
 import model.dao.ComputadorDAO;
@@ -115,6 +120,7 @@ public void readJtableForCod(String cod){
         Deletar = new javax.swing.JButton();
         JTF_Buscar = new javax.swing.JTextField();
         JBT_Buscar = new javax.swing.JButton();
+        JBT_Exportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar");
@@ -362,6 +368,14 @@ public void readJtableForCod(String cod){
             }
         });
 
+        JBT_Exportar.setText("Export");
+        JBT_Exportar.setPreferredSize(new java.awt.Dimension(67, 23));
+        JBT_Exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBT_ExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -372,10 +386,6 @@ public void readJtableForCod(String cod){
                         .addGap(98, 98, 98)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(JLB_Lab)
-                                .addGap(10, 10, 10)
-                                .addComponent(JComBox_Sala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(JLB_Tipo)
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,18 +393,23 @@ public void readJtableForCod(String cod){
                                         .addComponent(JRB_Alugado)
                                         .addGap(18, 18, 18)
                                         .addComponent(JComBox_Empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(JRB_Patrimonio)))))
+                                    .addComponent(JRB_Patrimonio)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JLB_Lab)
+                                .addGap(10, 10, 10)
+                                .addComponent(JComBox_Sala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(JTF_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JBT_Buscar))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(JLB_Cod)
                                 .addGap(10, 10, 10)
-                                .addComponent(JTF_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(JTF_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JTF_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JBT_Buscar)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
@@ -408,6 +423,8 @@ public void readJtableForCod(String cod){
                         .addComponent(Alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Deletar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JBT_Exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JBT_Limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -438,7 +455,7 @@ public void readJtableForCod(String cod){
                             .addComponent(JLB_Lab)
                             .addComponent(JComBox_Sala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JTF_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBT_Buscar))
@@ -452,6 +469,7 @@ public void readJtableForCod(String cod){
                         .addComponent(JBT_Limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(JBT_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JBT_Exportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Deletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -867,6 +885,72 @@ Computador p = new Computador();
     }
     }//GEN-LAST:event_JRB_AlugadoActionPerformed
 
+    private void JBT_ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBT_ExportarActionPerformed
+        /*JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file save");
+        int userSelection = fileChooser.showSaveDialog(this);
+        if(userSelection == JFileChooser.APPROVE_OPTION){
+            File fileToSave = fileChooser.getSelectedFile();
+            //lets write to file
+         
+            try {
+                FileWriter fw = new FileWriter(fileToSave);
+                BufferedWriter bw = new BufferedWriter(fw);
+                for (int i=0; i < JTbl_Consulta.getColumnCount(); i++) {
+                    for (int j = 0; j < JTbl_Consulta.getColumnCount(); j++) {
+                        //write
+                        if(JTbl_Consulta.getValueAt(i, j) == null){
+                            bw.write(" ,");
+                        }
+                            bw.write(String.valueOf(JTbl_Consulta.getValueAt(i, j))+", ");
+                    }
+                    bw.newLine();//record per line 
+                }
+                JOptionPane.showMessageDialog(this, "SUCCESSFULLY LOADED","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
+                bw.close();
+                fw.close();
+            } catch (IOException ex) {
+               JOptionPane.showMessageDialog(this, "ERROR","ERROR MESSAGE",JOptionPane.ERROR_MESSAGE);
+            }   
+        }*/
+        
+        
+        try 
+        {
+            File archivo = new File("C:\\Users\\lucas\\OneDrive\\Documentos\\dados.xls");
+            TableModel modelo = JTbl_Consulta.getModel();
+            FileWriter excel = new FileWriter(archivo);
+             for(int i = 0; i < modelo.getColumnCount(); i++)
+             {
+                excel.write(modelo.getColumnName(i) + ", ");
+             }
+             excel.write("\n");
+             for(int i=0; i< modelo.getRowCount(); i++) 
+             {
+                for(int j=0; j < modelo.getColumnCount(); j++) 
+                {
+                    String data = String.valueOf(modelo.getValueAt(i, j));
+                    if(data == null)
+                    {
+                        //JOptionPane.showMessageDialog(null, JTbl_Consulta.getColumnName(j) + data);
+                        data = " ";
+                    }
+                    //JOptionPane.showMessageDialog(null, JTbl_Consulta.getColumnName(j) + data);
+                    excel.write(data.toString()+", ");
+                }
+                excel.write("\n");
+            }
+
+        excel.close();
+            JOptionPane.showMessageDialog(null, "Arquivo criado");
+            
+        } catch (IOException ex) 
+        {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        //}
+    }//GEN-LAST:event_JBT_ExportarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -908,6 +992,7 @@ Computador p = new Computador();
     private javax.swing.JButton Deletar;
     private javax.swing.JButton JBT_Buscar;
     private javax.swing.JButton JBT_Cadastrar;
+    private javax.swing.JButton JBT_Exportar;
     private javax.swing.JButton JBT_Limpar;
     private javax.swing.JButton JBT_Sair;
     private javax.swing.JButton JBT_Voltar;
